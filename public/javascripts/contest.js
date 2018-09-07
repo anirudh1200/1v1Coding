@@ -3,11 +3,13 @@ socket.on("start", () => {
 });
 
 var language = "c_cpp";
+var compilerLang = "C";
 var select = document.querySelector("select");
 
 $("select").change(function(){
     language = select.value;
     editor.session.setMode("ace/mode/" + language);
+    compilerLang= $("#langDropDown option:selected").text().toUpperCase();
 });
 
 var compilerMessage = document.querySelector("#compilerMessage");
@@ -26,7 +28,7 @@ compileBtn.addEventListener("click", function(){
             'client_secret': secretKey,
             'async': 0,
             'source': text,
-            'lang': "C",
+            'lang': compilerLang,
             'time_limit': 5,
             'memory_limit': 262144,
         }
@@ -49,14 +51,14 @@ runBtnTest.addEventListener("click", function(){
             'client_secret': secretKey,
             'async': 0,
             'source': text,
-            'lang': "C",
+            'lang': compilerLang,
             'input': 20,
             'time_limit': 5,
             'memory_limit': 262144,
         }
     }).done(function(result){
-        alert('done');
-        console.log("result");
-        runStatus.innerHTML = result.run_status.output;
+        runStatus.innerHTML = "Expected Output = 20 <br>Output = ";
+        runStatus.innerHTML += result.run_status.output;
+        console.log(result.run_status.output);
     });
 });
