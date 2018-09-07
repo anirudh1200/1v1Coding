@@ -2,6 +2,11 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var http = require('http').Server(app);
+var mongoose = require('mongoose');
+var Question = require('./models/questions');
+
+// database setup
+mongoose.connect("mongodb://localhost/1v1coding", { useNewUrlParser: true });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
