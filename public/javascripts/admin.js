@@ -1,35 +1,29 @@
 var socket = io();
 
+for(let i=1;i<=8;i++) {
+    $("#" + i).click(() => {
+        let questionID = $("#" + i + "_select").val();
+        let totalTime = $("#" + i + "_time").val();
+        let roomID = i;
+        socket.emit("startContest", {questionID:questionID,totalTime:totalTime,roomID:roomID});
+    });
+}
 
-
-$("#1").click(() => {
-    socket.emit("startContest", 1);
-});
-
-$("#2").click(() => {
-    socket.emit("startContest", 2);
-});
-
-$("#3").click(() => {
-    socket.emit("startContest", 3);
-});
-
-$("#4").click(() => {
-    socket.emit("startContest", 4);
-});
-
-$("#5").click(() => {
-    socket.emit("startContest", 5);
-});
-
-$("#6").click(() => {
-    socket.emit("startContest", 6);
-});
-
-$("#7").click(() => {
-    socket.emit("startContest", 7);
-});
-
-$("#8").click(() => {
-    socket.emit("startContest", 8);
-});
+$("#formSubmit").click(function(){
+    let password = $("#formpassword").val();
+    let username = $("#formusername").val();
+    $.ajax({
+      method: "POST",
+      url: "http://localhost:3000/check",
+      data: { username: username, password: password }
+    })
+    .done(function(data){
+        if(data == "verified"){
+            $("#verifyModal").hide();
+        } else if(data == "fail"){
+            $("#warning").text("Username/Password incorrect!!");
+        } else {
+            console.log("Error");
+        }
+    })
+})

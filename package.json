@@ -3,20 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "begin": "node node_modules/nodemon/bin/nodemon.js app.js"
+    "start": "xdg-open http://localhost:3000/admin && xdg-open http://localhost:3000 && node app.js"
   },
   "dependencies": {
-    "cookie-parser": "~1.4.3",
+    "body-parser": "^1.18.3",
+    "compile-run": "^2.1.2",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
-    "mongoose": "^5.2.13",
-    "morgan": "~1.9.0",
+    "mongoose": "^5.2.14",
     "socket.io": "^2.1.1"
-  },
-  "devDependencies": {
-    "nodemon": "^1.18.4"
   }
 }
